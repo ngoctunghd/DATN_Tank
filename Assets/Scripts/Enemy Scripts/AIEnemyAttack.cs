@@ -5,6 +5,7 @@ public class AIEnemyAttack : MonoBehaviour {
 
     public GameObject Bullet;
     public GameObject bulletPos;
+    public float speedBullet;
 
     [SerializeField]
     private AudioSource audioSource;
@@ -16,7 +17,7 @@ public class AIEnemyAttack : MonoBehaviour {
     private bool colupPlayer;
     [SerializeField]
     private Transform startPos, upPos;
-    private float shootTimer = 0.5f;
+    private float shootTimer = 1f;
     float cooldown = 0;
 
     // Use this for initialization
@@ -31,7 +32,7 @@ public class AIEnemyAttack : MonoBehaviour {
         {
             audioSource.mute = false;
         }
-        StartCoroutine(Attack());
+        //StartCoroutine(Attack());
         //        GetComponent<PhotonView>().RPC("Shoot", PhotonTargets.All); 
     }
 
@@ -71,14 +72,22 @@ public class AIEnemyAttack : MonoBehaviour {
         }
         else
         {
-            var bullet = (GameObject)Instantiate(Bullet, bulletPos.transform.position, bulletPos.transform.rotation);
+
+            GameObject bullet = ObjectPooler.instance.GetPooledBulletEnemy();
+            if (bullet == null) return;
+
+            bullet.transform.position = bulletPos.transform.position;
+            bullet.transform.rotation = bulletPos.transform.rotation;
+            bullet.SetActive(true);
+
+            //var bullet = (GameObject)Instantiate(Bullet, bulletPos.transform.position, bulletPos.transform.rotation);
             var bulletBody = (Rigidbody2D)bullet.GetComponentInChildren(typeof(Rigidbody2D));
             //            bulletBody.AddForce( bulletPos.transform.up * speedBullet, ForceMode2D.Impulse);
-            bulletBody.velocity = bulletPos.transform.up * 10;
+            bulletBody.velocity = bulletPos.transform.up * speedBullet;
 
             if (transform.localScale.y < 0)
             {
-                bulletBody.velocity = bulletPos.transform.up * -10;
+                bulletBody.velocity = bulletPos.transform.up * -speedBullet;
             }
 
             audioSource.PlayOneShot(clipShoot);

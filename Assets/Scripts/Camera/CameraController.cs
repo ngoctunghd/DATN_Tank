@@ -3,6 +3,9 @@ using System.Collections;
 
 public class CameraController : MonoBehaviour {
 
+    public Transform target;
+    public float maxX, minY, maxY;
+
     private string isMusic;
 
     // Use this for initialization
@@ -19,5 +22,33 @@ public class CameraController : MonoBehaviour {
             GetComponent<AudioSource>().Play();
         }
 
+    }
+
+    void Update()
+    {
+        Vector3 temp = transform.position;
+        temp.x = target.position.x;
+        temp.y = target.position.y;
+
+        if (temp.x < -maxX)
+        {
+            temp.x = -maxX;
+        }
+
+        if (temp.x > maxX)
+        {
+            temp.x = maxX;
+        }
+
+        if (temp.y < minY)
+        {
+            temp.y = minY;
+        }
+
+        if (temp.y > maxY)
+        {
+            temp.y = maxY;
+        }
+        transform.position = temp;
     }
 }

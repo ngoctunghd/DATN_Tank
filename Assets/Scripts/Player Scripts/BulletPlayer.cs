@@ -63,9 +63,9 @@ public class BulletPlayer : MonoBehaviour {
             Destroy(gameObject);
             if (!PhotonNetwork.connected)
             {
-                Destroy(target.gameObject);
+                //Destroy(target.gameObject);
             }
-            SpawnManager.instance.DecreaseCurrentEnemy();
+            //SpawnManager.instance.DecreaseCurrentEnemy();
             GameObject.Find("GamePlayManager").GetComponent<GamePlayManager>().scoreUpdate();         
             CameraShake.instance.Shake(0.002f, 0.01f);
             

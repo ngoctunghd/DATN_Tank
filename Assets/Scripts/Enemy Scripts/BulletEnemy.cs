@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using UnityEngine.SceneManagement;
 
 public class BulletEnemy : MonoBehaviour {
 
@@ -10,7 +11,8 @@ public class BulletEnemy : MonoBehaviour {
     public GameObject explosion;
 
     public GameObject explosionBG, explosionPlayer;
-//    public GameObject player;
+
+    //    public GameObject player;
 
     void Awake()
     {
@@ -34,26 +36,26 @@ public class BulletEnemy : MonoBehaviour {
         if (target.tag == "stone" || target.tag == "StonePlayer")
         {
             Instantiate(explosionBG, transform.position, Quaternion.identity);
-            Destroy(gameObject);
+            Destroy();
         }
 
         if (target.tag == "brick")
         {
             Instantiate(explosionBG, transform.position, Quaternion.identity);
-            Destroy(gameObject);
+            Destroy();
             Destroy(target.gameObject);
         }
 
         if (target.tag == "brickEnemy")
         {
             Instantiate(explosionBG, transform.position, Quaternion.identity);
-            Destroy(gameObject);
+            Destroy();
         }
 
         if (target.tag == "Player")
         {
             Instantiate(explosion, transform.position, Quaternion.identity);
-            Destroy(gameObject);
+            Destroy();
             HealthPlayer.instane.SendMessage("HealthUpdate", damage, SendMessageOptions.DontRequireReceiver);
  //           health.SendMessage("HealthUpdate", damage, SendMessageOptions.DontRequireReceiver);
         }
@@ -62,19 +64,37 @@ public class BulletEnemy : MonoBehaviour {
             Instantiate(explosionPlayer, transform.position, Quaternion.identity);        
             CameraShake.instance.Shake(0.002f, 0.05f);
             gameManager.GetComponent<GamePlayManager>().GameOver();
-            Destroy(gameObject);
+            Destroy();
         }
 
         if (target.tag == "Rocket")
         {
             Instantiate(explosion, transform.position, Quaternion.identity);
-            Destroy(gameObject);
+            Destroy();
             Destroy(target.gameObject);
         }
 
         if (target.tag == "Amor")
-        {           
-            Destroy(gameObject);
+        {
+            Destroy();
         }
+
+
+        if (target.tag == "victory")
+        {
+            Instantiate(explosionPlayer, transform.position, Quaternion.identity);
+            CameraShake.instance.Shake(0.002f, 0.04f);
+            gameManager.GetComponent<GamePlayManager>().Victory();
+            PlayerPrefs.SetInt("Level " + (SceneManager.GetActiveScene().buildIndex), 1);
+            GamePlayManager.instance.scoreBonus();
+
+            Destroy();
+
+        }
+    }
+
+    void Destroy()
+    {
+        gameObject.SetActive(false);
     }
 }

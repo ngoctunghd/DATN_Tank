@@ -40,7 +40,7 @@ public class Victory : MonoBehaviour {
 	
     void OnTriggerEnter2D(Collider2D target)
     {
-        if (target.tag == "bulletplayer" || target.tag == "Rocket") {
+        if (target.tag == "bulletplayer" || target.tag == "Rocket" || target.tag == "bulletenemy") {
             isVictory = true;
             anim.Play(VICTORY);
             audioSource.PlayOneShot(clipVictory);
