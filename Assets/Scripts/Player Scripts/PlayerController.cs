@@ -118,7 +118,10 @@ public class PlayerController : Photon.MonoBehaviour {
         //    moveHorizontal = true;
         //}
 
-        //MoveKeyboard();
+#if UNITY_EDITOR
+        MoveKeyboard();
+#endif
+
 
         float x = ETCInput.GetAxis("Horizontal");
         float y = ETCInput.GetAxis("Vertical");
@@ -140,8 +143,9 @@ public class PlayerController : Photon.MonoBehaviour {
             x = (moveHorizontal ? x : 0f);
             y = (moveHorizontal ? 0f : y);
         }
-
+#if UNITY_ANDROID || UNITY_IOS
         myBody.velocity = new Vector2(x * tankSpeed, y * tankSpeed);
+#endif
 
         SetFacing();
         Shoot();

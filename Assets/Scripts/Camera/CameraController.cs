@@ -4,7 +4,7 @@ using System.Collections;
 public class CameraController : MonoBehaviour {
 
     public Transform target;
-    public float maxX, minY, maxY;
+    public float minX, maxX, minY, maxY;
 
     private string isMusic;
 
@@ -30,9 +30,9 @@ public class CameraController : MonoBehaviour {
         temp.x = target.position.x;
         temp.y = target.position.y;
 
-        if (temp.x < -maxX)
+        if (temp.x < minX)
         {
-            temp.x = -maxX;
+            temp.x = minX;
         }
 
         if (temp.x > maxX)
