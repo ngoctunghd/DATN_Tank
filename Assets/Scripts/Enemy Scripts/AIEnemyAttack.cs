@@ -38,6 +38,11 @@ public class AIEnemyAttack : MonoBehaviour {
 
     void Update()
     {
+        if (GetComponent<EnemyDefence>().isDead)
+        {
+            return;
+        }
+
         colupPlayer = Physics2D.Linecast(startPos.position, upPos.position, 1 << LayerMask.NameToLayer("player"));
         Debug.DrawLine(startPos.position, upPos.position, Color.red);
         cooldown -= Time.deltaTime;

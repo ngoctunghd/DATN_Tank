@@ -127,7 +127,7 @@ public class HealthPlayer : MonoBehaviour {
         barrel.GetComponent<SpriteRenderer>().sortingOrder =3;
         boxPlayer.enabled = true;
 
-        gameObject.transform.position = new Vector3(-2.2f, -4.5f, 0);      
+        gameObject.transform.position = new Vector3(28.3f, -4.01f, 0);      
         health = 1;
         timeAmor = 1.5f;
         Amor.SetActive(true);

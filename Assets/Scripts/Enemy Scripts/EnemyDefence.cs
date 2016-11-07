@@ -19,6 +19,8 @@ public class EnemyDefence : MonoBehaviour {
     private BoxCollider2D myBox;
     public GameObject[] items;
 
+    public bool isDead;
+
     void Awake()
     {
         myBody = GetComponent<Rigidbody2D>();
@@ -37,6 +39,8 @@ public class EnemyDefence : MonoBehaviour {
         {
             currentWaypoint = wayPoints[0];
         }
+
+        isDead = false;
     }
 
 
@@ -203,6 +207,7 @@ public class EnemyDefence : MonoBehaviour {
     {
         if (target.tag == "bulletplayer")
         {
+            isDead = true;
             Destroy();
             StartCoroutine(SpawnEnemy());
 
@@ -234,10 +239,13 @@ public class EnemyDefence : MonoBehaviour {
         yield return new WaitForSeconds(1f);
 
         mySprite.enabled = true;
-        myBox.enabled = true;
         transform.GetChild(0).GetComponent<SpriteRenderer>().enabled = true;
         transform.position = wayPoints[0].transform.position;
         currentIndex = 0;
         currentWaypoint = wayPoints[0];
+        yield return new WaitForSeconds(0.5f);
+        myBox.enabled = true;
+        isDead = false;
+       
     }
 }

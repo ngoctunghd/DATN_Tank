@@ -70,7 +70,7 @@ public class GamePlayManager : MonoBehaviour {
         int life = PlayerPrefs.GetInt("Life");
         Life.text = life + " x";
 
-        SetStoneEnemyFollowTime();
+        //SetStoneEnemyFollowTime();
 
 
         if(levelNum > 3)
