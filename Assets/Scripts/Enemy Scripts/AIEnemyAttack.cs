@@ -14,7 +14,7 @@ public class AIEnemyAttack : MonoBehaviour {
     private AudioClip clipShoot;
 
     private string isMusic;
-    private bool colupPlayer;
+    private bool colupPlayer, colupStone, colupBrick;
     [SerializeField]
     private Transform startPos, upPos;
     private float shootTimer = 1f;
@@ -38,18 +38,44 @@ public class AIEnemyAttack : MonoBehaviour {
 
     void Update()
     {
+        
         if (GetComponent<EnemyDefence>().isDead)
         {
             return;
         }
-
-        colupPlayer = Physics2D.Linecast(startPos.position, upPos.position, 1 << LayerMask.NameToLayer("player"));
-        Debug.DrawLine(startPos.position, upPos.position, Color.red);
+        //colupStone = Physics2D.Linecast(startPos.position, upPos.position, 1 << LayerMask.NameToLayer("stone"));
+        //colupBrick = Physics2D.Linecast(startPos.position, upPos.position, 1 << LayerMask.NameToLayer("brick"));
+        //colupPlayer = Physics2D.Linecast(startPos.position, upPos.position, 1 << LayerMask.NameToLayer("player"));
+        //colupPlayer = Physics2D.Raycast(startPos.position, upPos.position,5f,  1 << LayerMask.NameToLayer("player"));
+        //Debug.DrawLine(startPos.position, upPos.position, Color.red);
         cooldown -= Time.deltaTime;
-        if (colupPlayer)
+
+        float distance = 10f;
+
+        if (transform.localScale.y < 0)
+        {
+            Debug.Log(transform.localScale.y);
+            distance = -10f;
+        }
+
+        RaycastHit2D hitwall = Physics2D.Raycast(transform.position, Vector2.up, distance, 1 << LayerMask.NameToLayer("stone"));
+        RaycastHit2D hitbrick = Physics2D.Raycast(transform.position, Vector2.up, distance, 1 << LayerMask.NameToLayer("brick"));
+        
+        Debug.DrawRay(transform.position, transform.up * distance, Color.red);
+        RaycastHit2D hit = Physics2D.Raycast(transform.position, transform.up , distance, 1 << LayerMask.NameToLayer("player"));
+        if (hitwall || hitbrick)
+        {
+            return;
+        }
+        if (hit)
         {
             AttackNew();
         }
+
+        //    if (colupPlayer)
+        //{
+        //    AttackNew();
+        //}
     }
 
     IEnumerator Attack()

@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class PlayerController : Photon.MonoBehaviour {
 
@@ -41,6 +42,13 @@ public class PlayerController : Photon.MonoBehaviour {
 
     PhotonView m_PhotonView;
 
+    // set up dynamite
+    public GameObject dynamite;
+    public int countDynamite;
+    public Text textCountDynamite;
+    private float dynamiteTimer = 1.5f;
+    float cooldownDynamite = 0;
+
     void Awake()
     {
         moveHorizontal = true;
@@ -70,6 +78,9 @@ public class PlayerController : Photon.MonoBehaviour {
 
     void Start() {
 
+        countDynamite = 3;
+        textCountDynamite.text = countDynamite + "";
+
         isMusic = PlayerPrefs.GetString("Music");
         if (isMusic == "Off")
         {
@@ -96,7 +107,9 @@ public class PlayerController : Photon.MonoBehaviour {
         }
 
         cooldown -= Time.deltaTime;
-        
+        cooldownDynamite -= Time.deltaTime;
+
+
     }
   
     private void FixedUpdate()
@@ -258,4 +271,27 @@ public class PlayerController : Photon.MonoBehaviour {
         myBody.velocity = new Vector2(a * tankSpeed, b * tankSpeed);
     }
 
+
+    public void SetDynamite()
+    {
+        if (cooldown < 0 && countDynamite > 0)
+        {
+            Instantiate(dynamite, transform.position, Quaternion.identity);
+            countDynamite--;
+            textCountDynamite.text = countDynamite + "";
+            cooldownDynamite = dynamiteTimer;
+        }
+        
+    }
+
+    void OnTriggerEnter2D(Collider2D target)
+    {
+        if(target.tag == "itemdynamite")
+        {
+            countDynamite++;
+            textCountDynamite.text = countDynamite + "";
+        }
+    }
+
+    
 }

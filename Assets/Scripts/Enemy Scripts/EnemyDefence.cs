@@ -205,7 +205,7 @@ public class EnemyDefence : MonoBehaviour {
 
     void OnTriggerEnter2D(Collider2D target)
     {
-        if (target.tag == "bulletplayer")
+        if (target.tag == "bulletplayer" || target.tag == "dynamite")
         {
             isDead = true;
             Destroy();
@@ -219,6 +219,10 @@ public class EnemyDefence : MonoBehaviour {
             else if (random == 1)
             {
                 Instantiate(items[1], transform.position, Quaternion.identity);
+            }
+            else if (random == 2)
+            {
+                Instantiate(items[2], transform.position, Quaternion.identity);
             }
             else
             {

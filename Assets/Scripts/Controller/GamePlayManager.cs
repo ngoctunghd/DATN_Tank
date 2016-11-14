@@ -56,10 +56,10 @@ public class GamePlayManager : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
 # if UNITY_ANDROID || UNITY_IOS
-        if (AdManager.instance.BannerOnScreen() || AdManager.instance.BannerIsLoad())
-        {
-            AdManager.instance.HideBanner();
-        }
+        //if (AdManager.instance.BannerOnScreen() || AdManager.instance.BannerIsLoad())
+        //{
+        //    AdManager.instance.HideBanner();
+        //}
 #endif        
         timeShowAd = 3f;
 
@@ -110,10 +110,10 @@ public class GamePlayManager : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 #if UNITY_ANDROID || UNITY_IOS
-        if (AdManager.instance.BannerOnScreen())
-        {
-            AdManager.instance.HideBanner();
-        }
+        //if (AdManager.instance.BannerOnScreen())
+        //{
+        //    AdManager.instance.HideBanner();
+        //}
 #endif
         scoreText.text = score + "";
 
@@ -243,7 +243,7 @@ public class GamePlayManager : MonoBehaviour {
 
     private IEnumerator Over()
     {
-        AdManager.instance.IncreaseCountShowAd();
+        //AdManager.instance.IncreaseCountShowAd();
 
         yield return new WaitForSeconds(0.3f);
         Time.timeScale = 0;
