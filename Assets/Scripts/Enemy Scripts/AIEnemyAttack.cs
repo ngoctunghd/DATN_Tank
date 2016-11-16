@@ -43,39 +43,39 @@ public class AIEnemyAttack : MonoBehaviour {
         {
             return;
         }
-        //colupStone = Physics2D.Linecast(startPos.position, upPos.position, 1 << LayerMask.NameToLayer("stone"));
-        //colupBrick = Physics2D.Linecast(startPos.position, upPos.position, 1 << LayerMask.NameToLayer("brick"));
-        //colupPlayer = Physics2D.Linecast(startPos.position, upPos.position, 1 << LayerMask.NameToLayer("player"));
-        //colupPlayer = Physics2D.Raycast(startPos.position, upPos.position,5f,  1 << LayerMask.NameToLayer("player"));
-        //Debug.DrawLine(startPos.position, upPos.position, Color.red);
+
         cooldown -= Time.deltaTime;
 
         float distance = 10f;
 
         if (transform.localScale.y < 0)
         {
-            Debug.Log(transform.localScale.y);
             distance = -10f;
         }
-
-        RaycastHit2D hitwall = Physics2D.Raycast(transform.position, Vector2.up, distance, 1 << LayerMask.NameToLayer("stone"));
-        RaycastHit2D hitbrick = Physics2D.Raycast(transform.position, Vector2.up, distance, 1 << LayerMask.NameToLayer("brick"));
         
-        Debug.DrawRay(transform.position, transform.up * distance, Color.red);
-        RaycastHit2D hit = Physics2D.Raycast(transform.position, transform.up , distance, 1 << LayerMask.NameToLayer("player"));
-        if (hitwall || hitbrick)
-        {
-            return;
-        }
-        if (hit)
-        {
-            AttackNew();
-        }
-
-        //    if (colupPlayer)
+        Debug.DrawRay(upPos.position, transform.up * distance, Color.red);
+        RaycastHit2D hit = Physics2D.Raycast(upPos.position, transform.up , distance);
+        //if (hitwall || hitbrick)
         //{
-        //    AttackNew();
+        //    return;
         //}
+
+        if(hit.collider != null)
+        {
+            //Debug.Log(hit.collider.tag);
+            if (hit.collider.tag == "stone" || hit.collider.tag == "brick"
+                || hit.collider.tag == "victory" || hit.collider.tag == "enemy")
+            {
+                return;
+            }
+
+            if (hit.collider.tag == "Player")
+            {
+                AttackNew();
+            }
+        }
+        
+
     }
 
     IEnumerator Attack()
