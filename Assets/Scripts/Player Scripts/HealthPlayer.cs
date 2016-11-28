@@ -114,7 +114,7 @@ public class HealthPlayer : MonoBehaviour {
                 StartCoroutine("resSpawn", 0.7f);
             }
             else {
-                audioSource.PlayOneShot(clipGameOver);
+                //audioSource.PlayOneShot(clipGameOver);
             }
 
         }

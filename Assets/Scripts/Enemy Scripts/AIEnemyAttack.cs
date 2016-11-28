@@ -14,11 +14,11 @@ public class AIEnemyAttack : MonoBehaviour {
     private AudioClip clipShoot;
 
     private string isMusic;
-    private bool colupPlayer, colupStone, colupBrick;
     [SerializeField]
     private Transform startPos, upPos;
     private float shootTimer = 1f;
     float cooldown = 0;
+
 
     // Use this for initialization
     void Start()
@@ -48,19 +48,21 @@ public class AIEnemyAttack : MonoBehaviour {
 
         float distance = 10f;
 
+
         if (transform.localScale.y < 0)
         {
             distance = -10f;
         }
         
-        Debug.DrawRay(upPos.position, transform.up * distance, Color.red);
+        
         RaycastHit2D hit = Physics2D.Raycast(upPos.position, transform.up , distance);
+        
         //if (hitwall || hitbrick)
         //{
         //    return;
         //}
 
-        if(hit.collider != null)
+        if (hit.collider != null)
         {
             //Debug.Log(hit.collider.tag);
             if (hit.collider.tag == "stone" || hit.collider.tag == "brick"

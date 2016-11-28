@@ -20,6 +20,9 @@ public class EnemyDefence : MonoBehaviour {
     public GameObject[] items;
 
     public bool isDead;
+    public Transform downPos, rightPos, leftPos;
+    private float waitingTimer = 2f;
+    private float cooldown = 0;
 
     void Awake()
     {
@@ -51,6 +54,76 @@ public class EnemyDefence : MonoBehaviour {
 	 */
     void Update()
     {
+        float distanceDown = -2f;
+        float distanceRight = 2f;
+
+        if (transform.localScale.y < 0)
+        {
+            distanceDown = 2f;
+        }
+
+        if (transform.localScale.x < 0)
+        {
+            distanceRight = -2f;
+        }
+        Debug.DrawRay(downPos.position, transform.up * distanceDown, Color.red);
+        Debug.DrawRay(rightPos.position, -transform.right * distanceRight, Color.green);
+        Debug.DrawRay(leftPos.position, transform.right * distanceRight, Color.blue);
+        RaycastHit2D hitDown = Physics2D.Raycast(downPos.position, transform.up, distanceDown);
+        RaycastHit2D hitRight = Physics2D.Raycast(rightPos.position, -transform.right, distanceRight);
+        RaycastHit2D hitLeft = Physics2D.Raycast(leftPos.position, transform.right, distanceRight);
+
+        if (hitDown.collider != null)
+        {
+            if (hitDown.collider.tag == "Player")
+            {
+                isWaiting = true;
+                cooldown = waitingTimer;
+                Vector3 temp = transform.localScale;
+                if (temp.y < 0)
+                {
+                    temp.y = 1f;
+                }
+                else
+                {
+                    temp.y = -1f;
+                }
+                transform.localScale = temp;
+            }
+        }
+
+        if (hitRight.collider != null)
+        {
+            if (hitRight.collider.tag == "Player")
+            {
+                isWaiting = true;
+                cooldown = waitingTimer;
+                transform.localRotation = Quaternion.identity;
+                transform.Rotate(0, 0, -90);
+                transform.localScale = new Vector3(1, 1, 1);
+            }
+        }
+
+        if (hitLeft.collider != null)
+        {
+            if (hitLeft.collider.tag == "Player")
+            {
+                isWaiting = true;
+                cooldown = waitingTimer;
+                transform.localRotation = Quaternion.identity;
+                transform.Rotate(0, 0, 90);
+                transform.localScale = new Vector3(-1, 1, 1);
+            }
+        }
+
+        cooldown -= Time.deltaTime;
+        if(cooldown < 0)
+        {
+            isWaiting = false;
+        }
+
+
+
         if (currentWaypoint != null && !isWaiting)
         {
             MoveTowardsWaypoint();
@@ -211,8 +284,8 @@ public class EnemyDefence : MonoBehaviour {
             Destroy();
             StartCoroutine(SpawnEnemy());
 
-            int random = Random.Range(0, 6);
-            if (random == 0)
+            int random = Random.Range(0, 10);
+            if (random == 0 || random == 2)
             {
                 Instantiate(items[0], transform.position, Quaternion.identity);
             }
@@ -220,7 +293,7 @@ public class EnemyDefence : MonoBehaviour {
             {
                 Instantiate(items[1], transform.position, Quaternion.identity);
             }
-            else if (random == 2)
+            else if (random >= 3 || random <= 5)
             {
                 Instantiate(items[2], transform.position, Quaternion.identity);
             }

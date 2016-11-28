@@ -250,13 +250,13 @@ public class GamePlayManager : MonoBehaviour {
         gameOverPanel.SetActive(true);
         bestScore.text = PlayerPrefs.GetInt("best") + "";
       
-        if (AdManager.instance.CountShowAd >= 3)
-        {
-            AdManager.instance.LoadInterstitial();
-            yield return StartCoroutine(MyCoroutine.WaitForRealSeconds(.7f));
-            AdManager.instance.ShowInterstitial();
-            AdManager.instance.ResetCountShowAd();
-        }
+        //if (AdManager.instance.CountShowAd >= 3)
+        //{
+        //    AdManager.instance.LoadInterstitial();
+        //    yield return StartCoroutine(MyCoroutine.WaitForRealSeconds(.7f));
+        //    AdManager.instance.ShowInterstitial();
+        //    AdManager.instance.ResetCountShowAd();
+        //}
        
     }
 
