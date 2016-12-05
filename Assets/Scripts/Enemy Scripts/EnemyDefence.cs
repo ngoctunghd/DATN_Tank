@@ -11,7 +11,7 @@ public class EnemyDefence : MonoBehaviour {
 
     private Waypoint currentWaypoint;
     private int currentIndex = 0;
-    private bool isWaiting = false;
+    public bool isWaiting = false;
     private float speedStorage = 0;
 
     private Rigidbody2D myBody;
@@ -23,6 +23,8 @@ public class EnemyDefence : MonoBehaviour {
     public Transform downPos, rightPos, leftPos;
     private float waitingTimer = 2f;
     private float cooldown = 0;
+
+    public bool isMoveY;
 
     void Awake()
     {
@@ -122,7 +124,11 @@ public class EnemyDefence : MonoBehaviour {
             isWaiting = false;
         }
 
+        if (GetComponent<AIEnemyAttack>().isMove)
+        {
 
+            return;
+        }
 
         if (currentWaypoint != null && !isWaiting)
         {
@@ -193,24 +199,28 @@ public class EnemyDefence : MonoBehaviour {
                 transform.localRotation = Quaternion.identity;
                 transform.Rotate(0, 0, -90);
                 transform.localScale = new Vector3(1, 1, 1);
+                isMoveY = false;
             }
             else if (x < 0)
             {
                 transform.localRotation = Quaternion.identity;
                 transform.Rotate(0, 0, 90);
                 transform.localScale = new Vector3(-1, 1, 1);
+                isMoveY = false;
             }
             else if (y > 0)
             {
                 transform.localRotation = Quaternion.identity;
                 transform.Rotate(0, 0, 0);
                 transform.localScale = new Vector3(1, 1, 1);
+                isMoveY = true;
             }
             else if (y < 0)
             {
                 transform.localRotation = Quaternion.identity;
                 transform.Rotate(0, 0, 0);
                 transform.localScale = new Vector3(1, -1, 1);
+                isMoveY = true;
             }
         }
         else
