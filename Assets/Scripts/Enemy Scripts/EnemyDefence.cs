@@ -98,11 +98,21 @@ public class EnemyDefence : MonoBehaviour {
         {
             if (hitRight.collider.tag == "Player")
             {
+                
                 isWaiting = true;
                 cooldown = waitingTimer;
-                transform.localRotation = Quaternion.identity;
-                transform.Rotate(0, 0, -90);
-                transform.localScale = new Vector3(1, 1, 1);
+                if (transform.localRotation.z != 0)
+                {
+                    transform.localRotation = Quaternion.identity;
+                    transform.Rotate(0, 0, 0);
+                    transform.localScale = new Vector3(1, 1, 1);
+                }
+                else
+                {
+                    transform.localRotation = Quaternion.identity;
+                    transform.Rotate(0, 0, -90);
+                    transform.localScale = new Vector3(1, 1, 1);
+                }                
             }
         }
 
@@ -112,9 +122,18 @@ public class EnemyDefence : MonoBehaviour {
             {
                 isWaiting = true;
                 cooldown = waitingTimer;
-                transform.localRotation = Quaternion.identity;
-                transform.Rotate(0, 0, 90);
-                transform.localScale = new Vector3(-1, 1, 1);
+                if (transform.localRotation.z != 0)
+                {
+                    transform.localRotation = Quaternion.identity;
+                    transform.Rotate(0, 0, 0);
+                    transform.localScale = new Vector3(1, 1, 1);
+                }
+                else
+                {
+                    transform.localRotation = Quaternion.identity;
+                    transform.Rotate(0, 0, 90);
+                    transform.localScale = new Vector3(-1, 1, 1);
+                }                
             }
         }
 

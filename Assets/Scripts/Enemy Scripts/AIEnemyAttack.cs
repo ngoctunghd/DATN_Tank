@@ -91,7 +91,7 @@ public class AIEnemyAttack : MonoBehaviour {
 
             if (hit.collider.tag == "Player")
             {
-                cooldownMove = 4f;
+                cooldownMove = 2f;
                 time = cooldownMove / 2;
                 iMoveFollowPlayer = false;
                 random = Random.Range(0, 2);
@@ -108,7 +108,7 @@ public class AIEnemyAttack : MonoBehaviour {
             temp = transform.position;
             isMove = true;
             GetComponent<EnemyDefence>().isWaiting = true;
-            Debug.Log(random);
+            //Debug.Log(random);
             if (random == 0)
             {
                 if(GetComponent<EnemyDefence>().isMoveY)
@@ -209,7 +209,7 @@ public class AIEnemyAttack : MonoBehaviour {
             {
                 isMove = false;
                 GetComponent<EnemyDefence>().isWaiting = false;
-                Debug.Log(isMove);
+                //Debug.Log(isMove);
             }
             
         }
