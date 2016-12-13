@@ -148,6 +148,23 @@ public class PlayerController : Photon.MonoBehaviour {
             x = 0;
         }
 
+        if(x > 0)
+        {
+            x = 1f;
+        }
+        else if (x < 0)
+        {
+            x = -1f;
+        }
+        if (y > 0)
+        {
+            y = 1f;
+        }
+        else if (y < 0)
+        {
+            y = -1f;
+        }
+
         //float x = (Input.GetKey(KeyCode.A) ? -1 : 0) + (Input.GetKey(KeyCode.D) ? 1 : 0);
         //float y = (Input.GetKey(KeyCode.S) ? -1 : 0) + (Input.GetKey(KeyCode.W) ? 1 : 0);
 
