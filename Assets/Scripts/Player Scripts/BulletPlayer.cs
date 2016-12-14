@@ -122,6 +122,7 @@ public class BulletPlayer : MonoBehaviour {
             Destroy(gameObject);
         }
 
+        
 
     }
 

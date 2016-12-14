@@ -342,7 +342,7 @@ public class EnemyDefence : MonoBehaviour {
 
     IEnumerator SpawnEnemy()
     {
-        yield return new WaitForSeconds(1f);
+        yield return new WaitForSeconds(4f);
 
         mySprite.enabled = true;
         transform.GetChild(0).GetComponent<SpriteRenderer>().enabled = true;

@@ -100,6 +100,11 @@ public class PlayerController : Photon.MonoBehaviour {
         {
             return;
         }
+
+        if (HealthPlayer.instane.isDead)
+        {
+            return;
+        }
         timerChange -= Time.deltaTime;
         if (timerChange <= 0)
         {
@@ -119,6 +124,10 @@ public class PlayerController : Photon.MonoBehaviour {
             return;
         }
 
+        if (HealthPlayer.instane.isDead)
+        {
+            return;
+        }
         // cai dat getButon de dung joystick
         //if ((Input.GetKeyDown(KeyCode.S) || Input.GetKeyDown(KeyCode.W)) ||
         //    (Input.GetKeyUp(KeyCode.A) || Input.GetKeyUp(KeyCode.D)))

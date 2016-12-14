@@ -91,6 +91,19 @@ public class BulletEnemy : MonoBehaviour {
             Destroy();
 
         }
+
+        if (target.tag == "bulletplayer")
+        {
+            Instantiate(explosionBG, transform.position, Quaternion.identity);
+            Destroy();
+            Destroy(target.gameObject);
+        }
+
+        if (target.tag == "bulletenemy")
+        {
+            Instantiate(explosionBG, transform.position, Quaternion.identity);
+            Destroy();
+        }
     }
 
     void Destroy()
