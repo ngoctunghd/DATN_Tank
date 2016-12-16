@@ -313,7 +313,7 @@ public class EnemyDefence : MonoBehaviour {
             Destroy();
             StartCoroutine(SpawnEnemy());
 
-            int random = Random.Range(0, 10);
+            int random = Random.Range(0, 12);
             if (random == 0 || random == 2)
             {
                 Instantiate(items[0], transform.position, Quaternion.identity);
