@@ -73,7 +73,6 @@ public class MenuManager : MonoBehaviour {
         ButtonPanel.SetActive(true);
         InfoPanel.SetActive(false);
         networkPanel.SetActive(false);
-        AdManager.instance.HideBanner();
     }
 
     public void Exit()
@@ -95,7 +94,6 @@ public class MenuManager : MonoBehaviour {
     {
         networkPanel.SetActive(true);
         ButtonPanel.SetActive(false);
-        AdManager.instance.showBanner();
         //if (isNetwork == false)
         //{
         //    networkPanel.SetActive(true);

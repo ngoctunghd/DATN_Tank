@@ -7,6 +7,7 @@ public class CameraController : MonoBehaviour {
     public float minX, maxX, minY, maxY;
 
     private string isMusic;
+    public GameObject player;
 
     // Use this for initialization
     void Start()
@@ -26,6 +27,11 @@ public class CameraController : MonoBehaviour {
 
     void Update()
     {
+        if (player.GetComponent<HealthPlayer>().isDead)
+        {
+            return;
+        }
+
         Vector3 temp = transform.position;
         temp.x = target.position.x;
         temp.y = target.position.y;

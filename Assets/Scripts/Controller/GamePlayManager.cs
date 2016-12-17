@@ -168,18 +168,16 @@ public class GamePlayManager : MonoBehaviour {
 
     public void scoreBonus()
     {
-        score += 15;
+        score += 20;
     }
 
     public void Pause() {
         Time.timeScale = 0f;
         pausePanel.SetActive(true);
-        AdManager.instance.showBanner();
     }
  
 
     public void Resume() {
-        AdManager.instance.HideBanner();
         Time.timeScale = 1f;
         pausePanel.SetActive(false);
         
@@ -232,10 +230,8 @@ public class GamePlayManager : MonoBehaviour {
 
     private IEnumerator DelayVictory()
     {
-        AdManager.instance.LoadInterstitial();
         
         yield return new WaitForSeconds(0.3f);
-        AdManager.instance.ShowInterstitial();
         Time.timeScale = 0;
         victoryPanel.SetActive(true);
         SetHighScoreLevel();
@@ -243,20 +239,13 @@ public class GamePlayManager : MonoBehaviour {
 
     private IEnumerator Over()
     {
-        //AdManager.instance.IncreaseCountShowAd();
+
 
         yield return new WaitForSeconds(0.3f);
         Time.timeScale = 0;
         gameOverPanel.SetActive(true);
         bestScore.text = PlayerPrefs.GetInt("best") + "";
       
-        //if (AdManager.instance.CountShowAd >= 3)
-        //{
-        //    AdManager.instance.LoadInterstitial();
-        //    yield return StartCoroutine(MyCoroutine.WaitForRealSeconds(.7f));
-        //    AdManager.instance.ShowInterstitial();
-        //    AdManager.instance.ResetCountShowAd();
-        //}
        
     }
 
@@ -296,7 +285,6 @@ public class GamePlayManager : MonoBehaviour {
 
     public void Yes()
     {
-        AdManager.instance.HideBanner();
         SceneManager.LoadScene("Menu");
 
         //reset mang tank

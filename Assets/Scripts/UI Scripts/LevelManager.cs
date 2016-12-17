@@ -45,7 +45,6 @@ public class LevelManager : MonoBehaviour {
     // Use this for initialization
     void Start()
     {
-        AdManager.instance.showBanner();
 
         //      DeleteAll();
         FillList();
@@ -147,13 +146,11 @@ public class LevelManager : MonoBehaviour {
             yield return null;
         }
 
-        AdManager.instance.HideBanner();
     }
 
     public void BackToMenu()
     {
         SceneManager.LoadScene("Menu");
-        AdManager.instance.HideBanner();
     }
 
 }

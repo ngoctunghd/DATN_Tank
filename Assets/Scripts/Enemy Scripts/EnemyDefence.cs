@@ -68,9 +68,9 @@ public class EnemyDefence : MonoBehaviour {
         {
             distanceRight = -2f;
         }
-        Debug.DrawRay(downPos.position, transform.up * distanceDown, Color.red);
-        Debug.DrawRay(rightPos.position, -transform.right * distanceRight, Color.green);
-        Debug.DrawRay(leftPos.position, transform.right * distanceRight, Color.blue);
+        //Debug.DrawRay(downPos.position, transform.up * distanceDown, Color.red);
+        //Debug.DrawRay(rightPos.position, -transform.right * distanceRight, Color.green);
+        //Debug.DrawRay(leftPos.position, transform.right * distanceRight, Color.blue);
         RaycastHit2D hitDown = Physics2D.Raycast(downPos.position, transform.up, distanceDown);
         RaycastHit2D hitRight = Physics2D.Raycast(rightPos.position, -transform.right, distanceRight);
         RaycastHit2D hitLeft = Physics2D.Raycast(leftPos.position, transform.right, distanceRight);
