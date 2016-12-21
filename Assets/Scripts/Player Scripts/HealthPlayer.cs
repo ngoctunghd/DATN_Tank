@@ -141,6 +141,7 @@ public class HealthPlayer : MonoBehaviour {
         spritePlayer.sortingOrder = -1;
         barrel.GetComponent<SpriteRenderer>().sortingOrder = -1;
         boxPlayer.enabled = false;
+        Amor.SetActive(false);
     }
 
     private void DecreaseCountLife()
